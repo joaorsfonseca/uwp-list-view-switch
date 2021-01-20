@@ -38,6 +38,8 @@ namespace App6.ViewModels
 
     public class SizeViewModel
     {
+        public string IsEnabled { get; set; }
+
         public string Size { get; set; }
 
         public int Quantity { get; set; }

@@ -13,10 +13,11 @@
         <DataTemplate x:Key="SizeItemTemplate" x:DataType="vms:SizeViewModel">
             <StackPanel Width="250" Padding="10" Spacing="20">
                 <TextBlock Text="{x:Bind Size}" FontSize="24"></TextBlock>
+                <TextBox Text="{x:Bind Quantity}" FontSize="16" IsEnabled="{Binding IsEnabled, ElementName=RelayEnabledStatus}"></TextBox>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,10 +26,13 @@
         <ToggleSwitch Grid.Row="0" OnContent="YES" OffContent="NO" Toggled="ToggleSwitch_Toggled"/>
         <StackPanel Grid.Row="1">
             <TextBlock Text="{x:Bind ViewModel.PricePerSize, Mode=OneWay}" VerticalAlignment="Center"></TextBlock>
-        <ListView x:Name="ListSizes" 
+            <ListView x:Name="ListSizes" 
                   ItemsSource="{x:Bind ViewModel.Sizes, Mode=OneWay}" 
                   ItemTemplate="{StaticResource SizeItemTemplate}">
-        </ListView>
+                <ListView.Resources>
+                    <Button x:Name="RelayEnabledStatus" Visibility="Collapsed" IsEnabled="{x:Bind ViewModel.PricePerSize, Mode=OneWay}"/>
+                </ListView.Resources>
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>
